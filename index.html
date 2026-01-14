@@ -3,49 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio de Fotografía</title>
+    <title>Mi Portafolio - Mateo Sax</title>
     <style>
-        body { margin: 0; font-family: sans-serif; background: #111; color: white; }
-        header { padding: 40px; text-align: center; }
-        h1 { font-weight: 200; letter-spacing: 5px; text-transform: uppercase; }
+        body { margin: 0; font-family: 'Helvetica Neue', sans-serif; background: #0f0f0f; color: white; line-height: 1.6; }
+        header { padding: 60px 20px; text-align: center; }
+        h1 { font-weight: 200; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 10px; }
         
-        /* Estilo de cuadrícula distribuida (Masonry) */
+        /* Contenedor de cada sección */
+        .seccion { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .titulo-categoria { 
+            font-size: 1.5rem; 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Cuadrícula estilo Masonry */
         .galeria {
-            display: columns;
-            column-width: 300px;
-            column-gap: 15px;
-            padding: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
+            column-count: 3;
+            column-gap: 20px;
         }
 
         .galeria img {
             width: 100%;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
         }
 
-        .galeria img:hover { transform: scale(1.03); filter: brightness(1.1); }
+        .galeria img:hover { transform: translateY(-5px); filter: brightness(1.2); }
 
+        /* Ajuste para celulares */
+        @media (max-width: 900px) { .galeria { column-count: 2; } }
         @media (max-width: 600px) { .galeria { column-count: 1; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Mateo Sax - Fotografía</h1>
-    <p>Capturando momentos</p>
+    <h1>Mateo Sax</h1>
+    <p>PORTAFOLIO FOTOGRÁFICO</p>
 </header>
 
-<div class="galeria">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Paisaje 1">
-    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Paisaje 2">
-    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="Bosque">
-    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Montaña">
-    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Viaje">
-</div>
+<section class="seccion">
+    <h2 class="titulo-categoria">Paisajes y Naturaleza</h2>
+    <div class="galeria">
+        <img src="foto_paisaje1.jpg" alt="Paisaje">
+        <img src="foto_paisaje2.jpg" alt="Paisaje">
+        <img src="foto_paisaje3.jpg" alt="Paisaje">
+    </div>
+</section>
+
+<section class="seccion">
+    <h2 class="titulo-categoria">Retratos y Personas</h2>
+    <div class="galeria">
+        <img src="foto_retrato1.jpg" alt="Retrato">
+        <img src="foto_retrato2.jpg" alt="Retrato">
+    </div>
+</section>
+
+<section class="seccion">
+    <h2 class="titulo-categoria">Arquitectura y Urbano</h2>
+    <div class="galeria">
+        <img src="foto_urbano1.jpg" alt="Urbano">
+        <img src="foto_urbano2.jpg" alt="Urbano">
+    </div>
+</section>
 
 </body>
 </html>
