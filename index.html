@@ -3,146 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio - Mateo Gallego</title>
+    <title>Mateo Gallego | Visual Artist</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@200;400&display=swap" rel="stylesheet">
 
     <style>
+        /* RESET Y BASE */
+        * { cursor: crosshair; } /* Cursor estilo galería de arte */
         body { 
             margin: 0; 
-            font-family: 'Inter', sans-serif; /* Letra limpia para texto */
+            font-family: 'Inter', sans-serif; 
             color: white; 
-            background-color: #0f0f0f; 
+            background-color: #050505; 
             line-height: 1.6; 
+            overflow-x: hidden;
         }
         
-        /* MARCA DE AGUA */
+        /* EFECTO DE RUIDO CINEMATOGRÁFICO */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04; z-index: 999; pointer-events: none;
+        }
+
+        /* MARCA DE AGUA MEJORADA */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('fondo.png'); background-size: cover; background-position: center;
-            opacity: 0.15; z-index: -1; pointer-events: none;
+            opacity: 0.1; z-index: -1; pointer-events: none;
+            filter: grayscale(100%);
         }
         
-        header { padding: 100px 20px; text-align: center; }
-        
-        .banner-superior { 
-            max-width: 500px; width: 100%; height: auto; 
-            margin-bottom: 30px; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8)); 
-        }
-
-        h1 { 
-            font-family: 'Syne', sans-serif; /* Fuente impactante */
-            font-weight: 800; 
-            letter-spacing: -2px; /* Letras juntas para estilo moderno */
-            text-transform: uppercase; 
-            margin-bottom: 5px; 
-            font-size: 3.5rem;
-            background: linear-gradient(to right, #fff, #666);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p { 
-            color: #888; 
-            letter-spacing: 10px; 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            font-weight: 400;
-        }
-
-        /* SECCIÓN BIOGRAFÍA */
-        .bio-container { 
-            max-width: 700px; 
-            margin: 0 auto 80px auto; 
-            padding: 0 20px; 
+        /* HEADER ANIMADO */
+        header { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
             text-align: center;
         }
         
-        .bio-texto {
-            font-size: 1.2rem;
-            color: #eee;
-            font-weight: 200;
-            line-height: 1.9;
+        .banner-superior { 
+            max-width: 450px; width: 80%; height: auto; 
+            margin-bottom: 30px; 
+            animation: heroFade 2s ease forwards;
         }
 
-        /* GALERÍA ESTILO PINTEREST */
-        .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        h1 { 
+            font-family: 'Syne', sans-serif;
+            font-weight: 800; 
+            letter-spacing: -3px; 
+            text-transform: uppercase; 
+            margin: 0;
+            font-size: clamp(3rem, 10vw, 5rem); /* Tamaño fluido */
+            line-height: 0.9;
+        }
+
+        header p { 
+            color: #555; 
+            letter-spacing: 12px; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; 
+            margin-top: 20px;
+        }
+
+        /* SECCIÓN BIOGRAFÍA CON REVELACIÓN */
+        .bio-container { 
+            max-width: 700px; 
+            margin: 100px auto; 
+            padding: 0 20px; 
+            text-align: center;
+            opacity: 0; transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        /* CLASE PARA ANIMAR AL HACER SCROLL */
+        .reveal { opacity: 1 !important; transform: translateY(0) !important; }
+
+        .bio-texto { font-size: 1.2rem; color: #999; font-weight: 200; }
+
+        /* GALERÍA PROFESIONAL */
+        .seccion { padding: 60px 20px; max-width: 1400px; margin: 0 auto; opacity: 0; transform: translateY(40px); transition: all 1s ease; }
         
         .titulo-categoria { 
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem; 
-            font-weight: 700;
-            border-bottom: 1px solid #333; 
-            padding-bottom: 15px; 
-            margin-bottom: 40px; 
+            font-size: 0.9rem; 
+            font-weight: 400;
+            border-left: 2px solid #fff; 
+            padding-left: 15px; 
+            margin-bottom: 50px; 
             color: #fff; 
             text-transform: uppercase; 
-            letter-spacing: 2px; 
+            letter-spacing: 5px; 
         }
 
-        .galeria { column-count: 2; column-gap: 30px; }
+        .galeria { column-count: 2; column-gap: 40px; }
         .galeria img {
-            width: 100%; display: block; margin-bottom: 30px; border-radius: 8px;
-            cursor: pointer; transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%; display: block; margin-bottom: 40px; border-radius: 2px;
+            cursor: pointer; transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            filter: grayscale(30%) brightness(0.9);
         }
         .galeria img:hover { 
-            transform: scale(1.03) translateY(-5px); 
-            filter: brightness(1.1); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transform: scale(1.01); 
+            filter: grayscale(0%) brightness(1); 
         }
 
-        /* VISOR DE FOTOS */
+        /* VISOR OSCURO TOTAL */
         #visor {
             display: none; position: fixed; z-index: 1000; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.98);
-            justify-content: center; align-items: center; cursor: zoom-out;
+            width: 100%; height: 100%; background: #000;
+            justify-content: center; align-items: center;
         }
-        #visor img { max-width: 95%; max-height: 95%; border-radius: 4px; animation: zoomIn 0.3s ease; }
+        #visor img { max-width: 90%; max-height: 85%; object-fit: contain; }
 
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-
-        /* BOTÓN WHATSAPP */
+        /* BOTÓN WHATSAPP MINIMALISTA */
         .wsp-flotante {
-            position: fixed; bottom: 30px; right: 30px;
-            background-color: #25d366; width: 65px; height: 65px; border-radius: 50%;
+            position: fixed; bottom: 40px; right: 40px;
+            border: 1px solid rgba(255,255,255,0.2); width: 55px; height: 55px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 100;
-            text-decoration: none; transition: 0.3s;
+            z-index: 100; transition: 0.5s; backdrop-filter: blur(5px);
         }
-        .wsp-flotante svg { width: 35px; height: 35px; fill: white; }
-        .wsp-flotante:hover { transform: scale(1.1) rotate(10deg); background-color: #128c7e; }
+        .wsp-flotante svg { width: 22px; height: 22px; fill: white; }
+        .wsp-flotante:hover { background: white; }
+        .wsp-flotante:hover svg { fill: black; }
 
-        /* PIE DE PÁGINA */
-        footer { padding: 80px 20px; text-align: center; border-top: 1px solid #1a1a1a; margin-top: 50px; background: #0a0a0a; }
-        .redes a { 
-            color: #666; text-decoration: none; margin: 0 20px; 
-            text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; 
-            font-weight: 700; transition: 0.4s; 
+        @keyframes heroFade {
+            from { opacity: 0; transform: scale(1.1); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1); filter: blur(0); }
         }
-        .redes a:hover { color: white; letter-spacing: 5px; }
 
-        @media (max-width: 1000px) { 
-            .galeria { column-count: 1; } 
-            h1 { font-size: 2.5rem; }
-        }
+        @media (max-width: 1000px) { .galeria { column-count: 1; } }
     </style>
 </head>
 <body>
 
 <header>
     <img src="banner.png" alt="M.G. Visuals" class="banner-superior">
-    <h1>MATEO GALLEGO</h1>
-    <p>Visual Artist & Photographer</p>
+    <h1>MATEO<br>GALLEGO</h1>
+    <p>Fine Art Photographer</p>
 </header>
 
-<section class="bio-container">
-    <h2 class="titulo-categoria">Sobre Mí</h2>
+<section class="bio-container scroll-item">
+    <h2 class="titulo-categoria">Proceso</h2>
     <p class="bio-texto">
-        Hola, soy <strong>Mateo Sax</strong>. Mi pasión es capturar momentos únicos a través de mi lente, 
-        especializándome en retratos que cuentan historias y paisajes que transmiten la esencia de la naturaleza. 
-        Con cada disparo, busco congelar no solo una imagen, sino una emoción perdurable.
+        Capturando la intersección entre la luz natural y la emoción humana. 
+        Cada imagen es un fragmento de tiempo diseñado para ser eterno.
     </p>
 </section>
 
@@ -151,18 +157,10 @@
 </a>
 
 <div id="visor" onclick="this.style.display='none'">
-    <img id="fotoGrande" src="" alt="Vista grande">
+    <img id="fotoGrande" src="">
 </div>
 
-<section class="seccion">
-    <h2 class="titulo-categoria">Paisajes y Naturaleza</h2>
-    <div class="galeria">
-        <img src="foto_paisaje1.jpg" onclick="abrirFoto(this.src)">
-        <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-</section>
-
-<section class="seccion">
+<section class="seccion scroll-item">
     <h2 class="titulo-categoria">Retratos y Personas</h2>
     <div class="galeria">
         <img src="retratosypersonas/foto1.jpg" onclick="abrirFoto(this.src)">
@@ -173,28 +171,32 @@
     </div>
 </section>
 
-<section class="seccion">
-    <h2 class="titulo-categoria">Arquitectura y Urbano</h2>
-    <div class="galeria">
-        <img src="foto_urbano1.jpg" onclick="abrirFoto(this.src)">
-        <img src="foto_urbano2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-</section>
-
 <footer>
     <div class="redes">
         <a href="https://instagram.com/_soy_mateo_" target="_blank">Instagram</a>
-        <a href="mailto:tuemail@ejemplo.com">Correo</a>
-        <a href="#">TikTok</a>
+        <a href="mailto:mateogallego@example.com">Email</a>
     </div>
-    <p style="font-size: 0.7rem; color: #444; margin-top: 20px; letter-spacing: 2px;">© 2024 M.G. VISUALS</p>
 </footer>
 
 <script>
+    // Función para abrir fotos
     function abrirFoto(url) {
         document.getElementById('fotoGrande').src = url;
         document.getElementById('visor').style.display = 'flex';
     }
+
+    // EFECTO REVELAR AL HACER SCROLL
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.scroll-item').forEach(item => {
+        observer.observe(item);
+    });
 </script>
 
 </body>
