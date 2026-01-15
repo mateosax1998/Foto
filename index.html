@@ -78,3 +78,47 @@
 </div>
 
 <section class="seccion">
+    <h2 class="titulo-categoria">Paisajes y Naturaleza</h2>
+    <div class="galeria">
+        <img src="foto_paisaje1.jpg" onclick="abrirFoto(this.src)">
+        <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
+
+<section class="seccion">
+    <h2 class="titulo-categoria">Retratos y Personas</h2>
+    <div class="galeria">
+        <img src="retratosypersonas/foto1.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto2.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto3.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto4.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto5.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
+
+<section class="seccion">
+    <h2 class="titulo-categoria">Arquitectura y Urbano</h2>
+    <div class="galeria">
+        <img src="foto_urbano1.jpg" onclick="abrirFoto(this.src)">
+        <img src="foto_urbano2.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
+
+<footer>
+    <div class="redes">
+        <a href="https://instagram.com/_soy_mateo_" target="_blank">Instagram</a>
+        <a href="mailto:tuemail@ejemplo.com">Correo</a>
+        <a href="#">TikTok</a>
+    </div>
+    <p style="font-size: 0.7rem; color: #444; margin-top: 20px;">© 2024 M.G. VISUALS</p>
+</footer>
+
+<script>
+    function abrirFoto(url) {
+        document.getElementById('fotoGrande').src = url;
+        document.getElementById('visor').style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>
