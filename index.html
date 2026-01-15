@@ -10,20 +10,23 @@
             font-family: 'Helvetica Neue', sans-serif; 
             color: white; 
             line-height: 1.6; 
-            background-color: #0f0f0f; 
+            background-color: #0f0f0f; /* Color de fondo base muy oscuro */
         }
         
         /* EFECTO MARCA DE AGUA */
         body::before {
             content: "";
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Imagen de fondo con opacidad muy baja (0.1) para efecto marca de agua */
             background-image: url('fondo.jpg');
             background-size: cover;
             background-position: center;
             opacity: 0.15; 
-            z-index: -1; 
+            z-index: -1; /* Se mantiene detrás de todo */
             pointer-events: none;
         }
         
@@ -40,9 +43,7 @@
         h1 { font-weight: 200; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 10px; }
         p { color: #888; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem; }
         
-        /* CONTENEDOR MÁS ANCHO PARA FOTOS GRANDES */
-        .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
-        
+        .seccion { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
         .titulo-categoria { 
             font-size: 1.2rem; 
             border-bottom: 1px solid #333; 
@@ -53,28 +54,27 @@
             letter-spacing: 4px;
         }
 
-        /* GALERÍA CON FOTOS MÁS GRANDES (Cambiado de 3 a 2 columnas) */
         .galeria {
-            column-count: 2; 
-            column-gap: 30px; /* Espacio más amplio entre fotos */
+            column-count: 3;
+            column-gap: 20px;
         }
 
         .galeria img {
             width: 100%;
             display: block;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-radius: 4px;
             transition: all 0.5s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .galeria img:hover { 
-            transform: scale(1.03); 
+            transform: scale(1.02); 
             filter: brightness(1.1); 
         }
 
-        /* En tablets y móviles se mantiene en 1 sola columna para que sean gigantes */
-        @media (max-width: 1000px) { .galeria { column-count: 1; } }
+        @media (max-width: 900px) { .galeria { column-count: 2; } }
+        @media (max-width: 600px) { .galeria { column-count: 1; } }
     </style>
 </head>
 <body>
@@ -95,3 +95,20 @@
 </section>
 
 <section class="seccion">
+    <h2 class="titulo-categoria">Retratos y Personas</h2>
+    <div class="galeria">
+        <img src="foto_retrato1.jpg" alt="Retrato">
+        <img src="foto_retrato2.jpg" alt="Retrato">
+    </div>
+</section>
+
+<section class="seccion">
+    <h2 class="titulo-categoria">Arquitectura y Urbano</h2>
+    <div class="galeria">
+        <img src="foto_urbano1.jpg" alt="Urbano">
+        <img src="foto_urbano2.jpg" alt="Urbano">
+    </div>
+</section>
+
+</body>
+</html>
