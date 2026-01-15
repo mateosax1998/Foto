@@ -13,7 +13,7 @@
             background-color: #0f0f0f; 
         }
         
-        /* EFECTO MARCA DE AGUA - Usando fondo.png según tu carpeta */
+        /* EFECTO MARCA DE AGUA */
         body::before {
             content: "";
             position: fixed;
@@ -27,7 +27,6 @@
             pointer-events: none;
         }
         
-        /* ANIMACIÓN DE ENTRADA */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -63,26 +62,51 @@
             letter-spacing: 4px;
         }
 
+        /* --- NUEVO DISEÑO DE GALERÍA (ESTILO GRID MODERNO) --- */
         .galeria {
-            column-count: 2; 
-            column-gap: 30px; 
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 400px; /* Altura base de las fotos */
+            grid-gap: 20px;
+            grid-auto-flow: dense; /* Rellena huecos automáticamente */
         }
 
         .galeria img {
             width: 100%;
-            display: block;
-            margin-bottom: 30px;
+            height: 100%;
+            object-fit: cover; /* Recorta la foto para que llene el espacio sin deformarse */
             border-radius: 4px;
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .galeria img:hover { 
-            transform: scale(1.03); 
-            filter: brightness(1.1); 
+        /* Hace que cada 3 fotos, una sea el doble de ancha */
+        .galeria img:nth-child(3n) {
+            grid-column: span 2;
         }
 
-        @media (max-width: 1000px) { .galeria { column-count: 1; } }
+        /* Hace que cada 5 fotos, una sea el doble de alta */
+        .galeria img:nth-child(5n) {
+            grid-row: span 2;
+        }
+
+        .galeria img:hover { 
+            transform: scale(1.02); 
+            filter: brightness(1.2); 
+            z-index: 2;
+        }
+
+        /* Ajuste para móviles: Todo a una columna */
+        @media (max-width: 768px) {
+            .galeria {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+            }
+            .galeria img:nth-child(3n), .galeria img:nth-child(5n) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
     </style>
 </head>
 <body>
