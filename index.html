@@ -7,14 +7,14 @@
     <title>Portafolio - Mateo Gallego</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@200;400&display=swap" rel="stylesheet">
-
+ 
     <style>
         :root {
             --bg-color: #0d0d0d;
             --accent-color: #ffffff;
             --text-gray: #888;
         }
-
+ 
         body { 
             margin: 0; 
             font-family: 'Inter', sans-serif;
@@ -29,7 +29,7 @@
             user-select: none;
             transition: filter 0.4s ease;
         }
-
+ 
         /* SEGURIDAD: Desenfoque si el usuario pierde el foco (capturas de pantalla) */
         body.protegido {
             filter: blur(20px) grayscale(1);
@@ -41,14 +41,14 @@
             user-drag: none;
             pointer-events: auto;
         }
-
+ 
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('fondo.png'); background-size: cover; background-position: center;
             opacity: 0.1; z-index: -1; pointer-events: none;
             animation: slowPan 30s infinite alternate ease-in-out;
         }
-
+ 
         @keyframes slowPan {
             from { transform: scale(1); }
             to { transform: scale(1.1) translate(10px, 10px); }
@@ -65,12 +65,12 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
             animation: float 6s infinite ease-in-out;
         }
-
+ 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
-
+ 
         h1 { 
             font-family: 'Syne', sans-serif;
             font-weight: 800; 
@@ -82,21 +82,21 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
+ 
         header p { color: var(--text-gray); letter-spacing: 8px; text-transform: uppercase; font-size: 0.8rem; margin-top: 10px; }
-
+ 
         /* Efecto Revelar */
         .revelar {
             opacity: 0;
             transform: translateY(30px);
             transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
+ 
         .revelar.activo {
             opacity: 1;
             transform: translateY(0);
         }
-
+ 
         /* Sección Bio */
         .bio-container { 
             max-width: 950px; margin: 0 auto 120px auto; padding: 60px; 
@@ -106,15 +106,15 @@
             backdrop-filter: blur(15px);
             display: flex; gap: 50px; align-items: center;
         }
-
+ 
         .foto-perfil {
             flex: 0 0 300px; height: 400px; object-fit: cover;
             border-radius: 20px; filter: grayscale(1); border: 1px solid rgba(255,255,255,0.1);
         }
-
+ 
         .bio-info { flex: 1; }
         .bio-texto { font-size: 1rem; color: #ccc; font-weight: 300; text-align: justify; }
-
+ 
         /* Categorías y Galerías */
         .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         
@@ -123,30 +123,30 @@
             border-left: 4px solid #fff; padding-left: 20px; margin-bottom: 40px; 
             text-transform: uppercase; letter-spacing: 5px;
         }
-
+ 
         .contenedor-botones { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-
+ 
         .btn-modelo {
             background: transparent; border: 1px solid rgba(255,255,255,0.2);
             color: white; padding: 10px 25px; font-family: 'Syne', sans-serif;
             text-transform: uppercase; font-size: 0.7rem; cursor: pointer;
             border-radius: 30px; transition: 0.3s;
         }
-
+ 
         .btn-modelo.activo-btn { background: white; color: black; font-weight: 700; }
-
+ 
         .sub-titulo {
             font-family: 'Syne', sans-serif; font-size: 0.8rem; color: #666;
             text-transform: uppercase; letter-spacing: 3px; margin: 40px 0 20px 0;
             display: flex; align-items: center;
         }
         .sub-titulo::after { content: ""; height: 1px; background: #222; flex-grow: 1; margin-left: 15px; }
-
+ 
         .galeria { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px; margin-bottom: 60px; 
         }
-
+ 
         .galeria img {
             width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
             border-radius: 8px; cursor: pointer; transition: 0.5s ease;
@@ -154,7 +154,7 @@
         }
         
         .galeria img:hover { transform: scale(1.03); filter: grayscale(0); }
-
+ 
         /* Visor de Fotos */
         #visor {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0;
@@ -162,25 +162,25 @@
             justify-content: center; align-items: center; backdrop-filter: blur(20px);
         }
         #visor img { max-width: 90%; max-height: 90%; object-fit: contain; }
-
+ 
         /* Botones Flotantes */
-        .wsp-flotante, .ig-flotante {
+       .wsp-flotante, .ig-flotante {
             position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%;
             display: flex; justify-content: center; align-items: center; z-index: 100;
         }
         .wsp-flotante { bottom: 30px; background-color: #25d366; animation: pulse 2s infinite; }
         .ig-flotante { bottom: 105px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
         .wsp-flotante svg, .ig-flotante svg { width: 30px; height: 30px; fill: white; }
-
+ 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
-
+ 
         footer { padding: 80px 20px; text-align: center; background: #050505; }
         .redes a { color: #555; text-decoration: none; margin: 0 15px; font-size: 0.7rem; text-transform: uppercase; }
-
+ 
         @media (max-width: 800px) { 
             .bio-container { flex-direction: column; padding: 40px 20px; text-align: center; }
             .foto-perfil { flex: 0 0 auto; width: 100%; max-width: 280px; height: 350px; }
@@ -188,29 +188,29 @@
     </style>
 </head>
 <body oncontextmenu="return false;"> 
-
+ 
 <header>
     <img src="banner.png" alt="M.G. Visuals" class="banner-superior">
     <h1 class="revelar">MATEO GALLEGO</h1>
     <p class="revelar">Fotógrafo & Artista</p>
 </header>
-
+ 
 <section class="bio-container revelar">
     <img src="fotoperfil.jpg" alt="Mateo Gallego" class="foto-perfil">
     <div class="bio-info">
         <h2 class="titulo-categoria">Sobre Mí</h2>
         <p class="bio-texto">
-            <strong>Mateo Gallego</strong> es un fotógrafo colombiano con varios años de experiencia en fotografía de estudio,
-            editorial y documental. Su trabajo se caracteriza por una mirada sensible y consciente, enfocada en la transmisión de emociones, sensaciones y narrativas visuales que conectan con el espectador.
-            <br><br>
+           <strong>Mateo Gallego</strong> es un fotógrafo colombiano con varios años de experiencia en fotografía de estudio,
+           editorial y documental. Su trabajo se caracteriza por una mirada sensible y consciente, enfocada en la transmisión de emociones, sensaciones y narrativas visuales que conectan con el espectador.
+           <br><br>
             En la fotografía de estudio, desarrolla retratos que priorizan la expresión, el gesto y la identidad de las personas, utilizando la luz y el encuadre como herramientas narrativas.
             En el ámbito editorial, su trabajo se orienta a construir imágenes sólidas y estéticamente cuidadas.
-            <br><br>
+           <br><br>
             Desde la fotografía documental, he trabajado de manera constante en la documentación de procesos culturales y artísticos, especialmente en bandas sinfónicas, donde explora la disciplina y el esfuerzo colectivo.
         </p>
     </div>
 </section>
-
+ 
 <section class="seccion revelar">
     <h2 class="titulo-categoria">Retratos</h2>
     <div class="contenedor-botones">
@@ -227,7 +227,7 @@
             <img src="retratosypersonas/foto5.jpg" onclick="abrirFoto(this.src)">
         </div>
     </div>
-
+ 
     <div id="santiago" class="modelo-content" style="display: none;">
         <div class="sub-titulo">Modelo: Santiago Castro</div>
         <div class="galeria">
@@ -236,7 +236,7 @@
         </div>
     </div>
 </section>
-
+ 
 <section class="seccion revelar">
     <h2 class="titulo-categoria">Paisajes</h2>
     <div class="sub-titulo">Ubicación: Los Nevados</div>
@@ -245,7 +245,7 @@
         <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
     </div>
 </section>
-
+ 
 <section class="seccion revelar">
     <h2 class="titulo-categoria">Urbano</h2>
     <div class="sub-titulo">Ciudad: Medellín</div>
@@ -254,19 +254,19 @@
         <img src="foto_urbano2.jpg" onclick="abrirFoto(this.src)">
     </div>
 </section>
-
+ 
 <div id="visor" onclick="this.style.display='none'">
     <img id="fotoGrande" src="">
 </div>
-
+ 
 <a href="https://instagram.com/_soy_mateo_" class="ig-flotante" target="_blank">
     <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
 </a>
-
+ 
 <a href="https://api.whatsapp.com/send?phone=573218870891" class="wsp-flotante" target="_blank">
     <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.5 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
-
+ 
 <footer>
     <div class="redes">
         <a href="https://instagram.com/_soy_mateo_" target="_blank">Instagram</a>
@@ -274,7 +274,7 @@
     </div>
     <p style="font-size: 0.6rem; color: #333; margin-top: 20px;">© 2024 M.G. VISUALS - PROTEGIDO POR DERECHOS DE AUTOR</p>
 </footer>
-
+ 
 <script>
     // --- SEGURIDAD: Bloqueo de Teclado ---
     document.addEventListener('keydown', function(e) {
@@ -283,39 +283,60 @@
             return false;
         }
         if (e.key === "PrintScreen") {
-            navigator.clipboard.writeText("");
+           navigator.clipboard.writeText("");
             alert("Captura no permitida.");
         }
     });
-
+ 
     // --- SEGURIDAD: Desenfoque Anti-Captura (Foco) ---
     window.addEventListener('blur', () => document.body.classList.add('protegido'));
     window.addEventListener('focus', () => document.body.classList.remove('protegido'));
 
+    // --- SEGURIDAD MÓVIL: Ocultar contenido en multitarea ---
+    document.addEventListener("visibilitychange", function() {
+        if (document.hidden) {
+            document.body.style.opacity = "0";
+        } else {
+            document.body.style.opacity = "1";
+        }
+    });
+
+    // --- SEGURIDAD MÓVIL: Bloqueo de pulsación larga (evita guardar imagen) ---
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            // Prevenir el menú contextual en móviles al mantener presionado
+            e.target.oncontextmenu = function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            };
+        }
+    }, {passive: false});
+ 
     // Lógica de navegación
     function verModelo(id, btn) {
-        document.querySelectorAll('.modelo-content').forEach(m => m.style.display = 'none');
-        document.querySelectorAll('.btn-modelo').forEach(b => b.classList.remove('activo-btn'));
-        document.getElementById(id).style.display = 'block';
+       document.querySelectorAll('.modelo-content').forEach(m => m.style.display = 'none');
+       document.querySelectorAll('.btn-modelo').forEach(b => b.classList.remove('activo-btn'));
+       document.getElementById(id).style.display = 'block';
         btn.classList.add('activo-btn');
     }
-
+ 
     function abrirFoto(url) {
         const visor = document.getElementById('visor');
         const foto = document.getElementById('fotoGrande');
         foto.src = url;
         visor.style.display = 'flex';
     }
-
+ 
     // Scroll Animación
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('activo');
         });
     }, { threshold: 0.1 });
-
-    document.querySelectorAll('.revelar').forEach(el => observer.observe(el));
+ 
+   document.querySelectorAll('.revelar').forEach(el => observer.observe(el));
 </script>
-
+ 
 </body>
 </html>
