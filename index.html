@@ -33,6 +33,7 @@
         header { 
             padding: 120px 20px; 
             text-align: center;
+            perspective: 1000px;
         }
         
         .banner-superior { 
@@ -61,6 +62,7 @@
 
         header p { color: #888; letter-spacing: 8px; text-transform: uppercase; font-size: 0.8rem; }
 
+        /* REVELADO AL HACER SCROLL */
         .revelar {
             opacity: 0;
             transform: translateY(30px);
@@ -72,41 +74,29 @@
             transform: translateY(0);
         }
 
-        .seccion { padding: 60px 20px; max-width: 1400px; margin: 0 auto; }
+        .bio-container { max-width: 700px; margin: 0 auto 100px auto; padding: 0 20px; text-align: center; }
+        .bio-texto { font-size: 1.2rem; color: #bbb; font-weight: 200; }
+
+        .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         
-        /* CATEGORÍA PRINCIPAL */
         .titulo-categoria { 
             font-family: 'Syne', sans-serif;
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
-            font-weight: 800;
-            margin-bottom: 40px; 
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-weight: 700;
+            border-left: 4px solid #fff; 
+            padding-left: 20px; 
+            margin-bottom: 50px; 
             text-transform: uppercase; 
-            letter-spacing: 2px;
-            color: #fff;
-            border-bottom: 1px solid #222;
-            padding-bottom: 15px;
+            letter-spacing: 5px;
         }
 
-        /* SUBCATEGORÍA (MODELOS/LUGARES) */
-        .subtitulo-nombre {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #25d366; /* Color verde para resaltar el nombre */
-            margin: 40px 0 20px 0;
-            display: flex;
-            align-items: center;
-        }
-        .subtitulo-nombre::after {
-            content: ""; height: 1px; flex-grow: 1; background: #222; margin-left: 20px;
-        }
-
-        .galeria { column-count: 2; column-gap: 30px; margin-bottom: 50px; }
+        /* GALERÍA SIN FILTROS DE COLOR */
+        .galeria { column-count: 2; column-gap: 30px; }
         .galeria img {
             width: 100%; display: block; margin-bottom: 30px; border-radius: 4px;
             cursor: pointer; 
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            filter: brightness(1); /* Asegura color original */
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         
@@ -115,6 +105,7 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.7);
         }
 
+        /* VISOR */
         #visor {
             display: none; position: fixed; z-index: 1000; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.98);
@@ -123,6 +114,7 @@
         }
         #visor img { max-width: 90%; max-height: 90%; border-radius: 2px; }
 
+        /* WHATSAPP */
         .wsp-flotante {
             position: fixed; bottom: 30px; right: 30px;
             background-color: #25d366; width: 60px; height: 60px; border-radius: 50%;
@@ -140,7 +132,7 @@
 
         footer { padding: 100px 20px; text-align: center; background: #080808; }
         .redes a { color: #555; text-decoration: none; margin: 0 15px; letter-spacing: 2px; font-size: 0.7rem; transition: 0.3s; }
-        .redes a:hover { color: white; }
+        .redes a:hover { color: white; text-shadow: 0 0 10px white; }
 
         @media (max-width: 1000px) { .galeria { column-count: 1; } }
     </style>
@@ -153,35 +145,12 @@
     <p class="revelar">Visual Artist & Photographer</p>
 </header>
 
-<section class="seccion revelar">
-    <h2 class="titulo-categoria">Retratos</h2>
-    
-    <h3 class="subtitulo-nombre">Modelo: Valentina Ríos</h3>
-    <div class="galeria">
-        <img src="retratosypersonas/valentina1.jpg" onclick="abrirFoto(this.src)">
-        <img src="retratosypersonas/valentina2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-
-    <h3 class="subtitulo-nombre">Modelo: Juan Pablo</h3>
-    <div class="galeria">
-        <img src="retratosypersonas/juan1.jpg" onclick="abrirFoto(this.src)">
-        <img src="retratosypersonas/juan2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-</section>
-
-<section class="seccion revelar">
-    <h2 class="titulo-categoria">Paisajes</h2>
-    
-    <h3 class="subtitulo-nombre">Lugar: Desierto de la Tatacoa</h3>
-    <div class="galeria">
-        <img src="foto_paisaje1.jpg" onclick="abrirFoto(this.src)">
-        <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-
-    <h3 class="subtitulo-nombre">Lugar: Salento, Quindío</h3>
-    <div class="galeria">
-        <img src="foto_paisaje3.jpg" onclick="abrirFoto(this.src)">
-    </div>
+<section class="bio-container revelar">
+    <h2 class="titulo-categoria">Sobre Mí</h2>
+    <p class="bio-texto">
+        Hola, soy <strong>Mateo Sax</strong>. Mi pasión es capturar momentos únicos a través de mi lente, 
+        especializándome en retratos que cuentan historias y paisajes que transmiten la esencia de la naturaleza. 
+    </p>
 </section>
 
 <a href="https://api.whatsapp.com/send?phone=573218870891" class="wsp-flotante" target="_blank">
@@ -191,6 +160,33 @@
 <div id="visor" onclick="this.style.display='none'">
     <img id="fotoGrande" src="" alt="Vista grande">
 </div>
+
+<section class="seccion revelar">
+    <h2 class="titulo-categoria">Paisajes</h2>
+    <div class="galeria">
+        <img src="foto_paisaje1.jpg" onclick="abrirFoto(this.src)">
+        <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
+
+<section class="seccion revelar">
+    <h2 class="titulo-categoria">Retratos</h2>
+    <div class="galeria">
+        <img src="retratosypersonas/foto1.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto2.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto3.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto4.jpg" onclick="abrirFoto(this.src)">
+        <img src="retratosypersonas/foto5.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
+
+<section class="seccion revelar">
+    <h2 class="titulo-categoria">Urbano</h2>
+    <div class="galeria">
+        <img src="foto_urbano1.jpg" onclick="abrirFoto(this.src)">
+        <img src="foto_urbano2.jpg" onclick="abrirFoto(this.src)">
+    </div>
+</section>
 
 <footer>
     <div class="redes">
