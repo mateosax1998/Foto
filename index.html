@@ -107,25 +107,32 @@
         .bio-info { flex: 1; }
         .bio-texto { font-size: 1rem; color: #ccc; font-weight: 300; text-align: justify; }
 
-        /* ESTILOS PRESENTACIÓN TIPO SLIDESHOW */
+        /* PRESENTACIÓN (SLIDESHOW) - IMÁGENES COMPLETAS */
         .presentacion-container {
-            max-width: 1200px; margin: 0 auto 100px auto;
+            max-width: 1000px; margin: 0 auto 100px auto;
             position: relative; overflow: hidden; border-radius: 20px;
-            height: 500px;
+            height: 70vh; /* Ajuste para que se vea bien en celulares y PC */
+            background: rgba(0,0,0,0.3);
         }
         .slide {
             position: absolute; width: 100%; height: 100%; opacity: 0;
-            transition: opacity 1.5s ease-in-out; display: flex;
+            transition: opacity 1s ease-in-out; display: flex;
             justify-content: center; align-items: center;
         }
         .slide.active { opacity: 1; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slide-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 40px; background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            text-align: left;
+        .slide img { 
+            width: 100%; height: 100%; 
+            object-fit: contain; /* ESTO HACE QUE SE VEA COMPLETA SIN RECORTAR */
         }
-        .slide-overlay h3 { font-family: 'Syne'; font-size: 1.5rem; margin: 0; letter-spacing: 3px; }
+        .slide-overlay {
+            position: absolute; bottom: 20px; width: 100%;
+            text-align: center;
+        }
+        .slide-overlay h3 { 
+            font-family: 'Syne'; font-size: 1rem; margin: 0; 
+            letter-spacing: 5px; color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+        }
  
         .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
         
@@ -166,12 +173,16 @@
         
         .galeria img:hover { transform: scale(1.03); filter: grayscale(0); }
  
+        /* VISOR - IMÁGENES COMPLETAS */
         #visor {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0;
             width: 100%; height: 100%; background: rgba(0,0,0,0.98);
             justify-content: center; align-items: center; backdrop-filter: blur(20px);
         }
-        #visor img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        #visor img { 
+            max-width: 95%; max-height: 95%; 
+            object-fit: contain; /* GARANTIZA FOTO COMPLETA */
+        }
  
         .wsp-flotante, .ig-flotante {
             position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%;
@@ -193,7 +204,7 @@
         @media (max-width: 800px) { 
             .bio-container { flex-direction: column; padding: 40px 20px; text-align: center; }
             .foto-perfil { flex: 0 0 auto; width: 100%; max-width: 280px; height: 350px; }
-            .presentacion-container { height: 350px; margin-bottom: 60px; }
+            .presentacion-container { height: 50vh; }
         }
     </style>
 </head>
@@ -211,25 +222,24 @@
         <h2 class="titulo-categoria">Sobre Mí</h2>
         <p class="bio-texto">
            <strong>Mateo Gallego</strong> es un fotógrafo colombiano con varios años de experiencia en fotografía de estudio,
-            editorial y documental. Su trabajo se caracteriza por una mirada sensible y consciente, enfocada en la transmisión de emociones, sensaciones y narrativas visuales que conectan con el espectador.
-            <br><br>
-            En la fotografía de estudio, desarrolla retratos que priorizan la expresión, el gesto y la identidad de las personas.
+           editorial y documental. Su trabajo se caracteriza por una mirada sensible y consciente, enfocada en la transmisión de emociones.
         </p>
     </div>
 </section>
 
 <section class="presentacion-container revelar">
     <div class="slide active">
-        <img src="retratosypersonas/foto1.jpg" alt="Highlight 1">
-        <div class="slide-overlay"><h3>GALERÍA DESTACADA</h3></div>
+        <img src="retratosypersonas/foto1.jpg">
+        <div class="slide-overlay"><h3>PRESENTACIÓN</h3></div>
     </div>
     <div class="slide">
-        <img src="foto_paisaje1.jpg" alt="Highlight 2">
-        <div class="slide-overlay"><h3>PAISAJES NATURALES</h3></div>
+        <img src="retratosypersonas/foto2.jpg">
     </div>
     <div class="slide">
-        <img src="retratosypersonas/santiago1.jpg" alt="Highlight 3">
-        <div class="slide-overlay"><h3>RETRATOS EDITORIALES</h3></div>
+        <img src="foto_paisaje1.jpg">
+    </div>
+    <div class="slide">
+        <img src="retratosypersonas/santiago1.jpg">
     </div>
 </section>
  
@@ -299,13 +309,14 @@
     const slides = document.querySelectorAll('.slide');
     
     function nextSlide() {
+        if (slides.length === 0) return;
         slides[currentSlide].classList.remove('active');
         currentSlide = (currentSlide + 1) % slides.length;
         slides[currentSlide].classList.add('active');
     }
-    setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+    setInterval(nextSlide, 4000); // Cambio cada 4 segundos
 
-    // --- SEGURIDAD: Bloqueo de Teclado ---
+    // --- SEGURIDAD Y NAVEGACIÓN ---
     document.addEventListener('keydown', function(e) {
         if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) {
             e.preventDefault();
@@ -345,6 +356,7 @@
     }
 
     function cambiarFoto(direccion) {
+        if (imagenesGaleria.length === 0) return;
         indiceActual += direccion;
         if (indiceActual < 0) indiceActual = imagenesGaleria.length - 1;
         if (indiceActual >= imagenesGaleria.length) indiceActual = 0;
@@ -352,14 +364,8 @@
     }
 
     const visor = document.getElementById('visor');
-    visor.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    visor.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
+    visor.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    visor.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); });
 
     function handleSwipe() {
         if (touchEndX < touchStartX - 50) cambiarFoto(1);
