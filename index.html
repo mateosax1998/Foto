@@ -88,7 +88,6 @@
             box-shadow: 0 40px 100px rgba(0,0,0,0.5);
         }
 
-        /* Título decorativo interno sutil */
         .bio-container::before {
             content: "EST. 2024";
             position: absolute;
@@ -107,7 +106,6 @@
             text-align: justify;
         }
 
-        /* Letra Capitular (Estilo Editorial) */
         .bio-texto::first-letter {
             font-family: 'Syne', sans-serif;
             float: left;
@@ -128,12 +126,86 @@
             letter-spacing: 0.5px;
         }
 
-        /* Separador decorativo al final del texto */
-        .bio-texto::after {
-            content: " ■";
-            color: rgba(255,255,255,0.3);
-            font-size: 0.8rem;
+        /* --- ESTILO DE BOTONES DE CATEGORÍA (PORTADAS) --- */
+        .contenedor-portadas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
+
+        .card-modelo {
+            position: relative;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-modelo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease, filter 0.5s ease;
+        }
+
+        .card-modelo .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            transition: background 0.4s ease;
+        }
+
+        .card-modelo h3 {
+            font-family: 'Syne', sans-serif;
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .btn-ver-mas {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        /* HOVER EFFECTS */
+        .card-modelo:hover {
+            transform: scale(1.02);
+        }
+
+        .card-modelo:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.6);
+        }
+
+        .card-modelo:hover .btn-ver-mas {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-ver-mas:hover {
+            background: white;
+            color: black;
+        }
+
         /* -------------------------------------- */
 
         .seccion { padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
@@ -147,39 +219,6 @@
             margin-bottom: 40px; 
             text-transform: uppercase; 
             letter-spacing: 5px;
-        }
-
-        .sub-titulo {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.85rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 40px 0 20px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .sub-titulo::after {
-            content: "";
-            height: 1px;
-            background: #222;
-            flex-grow: 1;
-            margin-left: 15px;
-        }
-
-        .galeria { column-count: 2; column-gap: 30px; margin-bottom: 60px; }
-        .galeria img {
-            width: 100%; display: block; margin-bottom: 30px; border-radius: 4px;
-            cursor: pointer; 
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-            filter: brightness(1); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
-        
-        .galeria img:hover { 
-            transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
         }
 
         #visor {
@@ -210,8 +249,8 @@
         .redes a:hover { color: white; text-shadow: 0 0 10px white; }
 
         @media (max-width: 1000px) { 
-            .galeria { column-count: 1; } 
             .bio-container { padding: 40px 25px; margin: 0 20px 80px 20px; }
+            .contenedor-portadas { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -245,39 +284,38 @@
 </div>
 
 <section class="seccion revelar">
-    <h2 class="titulo-categoria">Paisajes</h2>
-    
-    <div class="sub-titulo">Ubicación: Los Nevados</div>
-    <div class="galeria">
-        <img src="foto_paisaje1.jpg" onclick="abrirFoto(this.src)">
-        <img src="foto_paisaje2.jpg" onclick="abrirFoto(this.src)">
-    </div>
-</section>
-
-<section class="seccion revelar">
     <h2 class="titulo-categoria">Retratos</h2>
 
-    <div class="sub-titulo">Modelo: LARRY ARIAS</div>
-    <div class="galeria">
-        <img src="retratosypersonas/foto1.jpg" onclick="abrirFoto(this.src)">
-        <img src="retratosypersonas/foto2.jpg" onclick="abrirFoto(this.src)">
-          <img src="retratosypersonas/foto3.jpg" onclick="abrirFoto(this.src)">
-        <img src="retratosypersonas/foto4.jpg" onclick="abrirFoto(this.src)">
-        <img src="retratosypersonas/foto5.jpg" onclick="abrirFoto(this.src)">
-    </div>
+    <div class="contenedor-portadas">
+        <div class="card-modelo" onclick="abrirFoto('retratosypersonas/foto1.jpg')">
+            <img src="retratosypersonas/foto1.jpg" alt="Larry Arias">
+            <div class="overlay">
+                <h3>Larry Arias</h3>
+                <button class="btn-ver-mas">Ver Portafolio</button>
+            </div>
+        </div>
 
-    <div class="sub-titulo">Modelo: Santiago Castro</div>
-    <div class="galeria">
-    </div>
+        <div class="card-modelo" onclick="abrirFoto('foto_urbano1.jpg')">
+            <img src="foto_urbano1.jpg" alt="Santiago Castro">
+            <div class="overlay">
+                <h3>Santiago Castro</h3>
+                <button class="btn-ver-mas">Ver Portafolio</button>
+            </div>
+        </div>
+        
+        </div>
 </section>
 
 <section class="seccion revelar">
-    <h2 class="titulo-categoria">Urbano</h2>
-    
-    <div class="sub-titulo">Ciudad: Medellín</div>
-    <div class="galeria">
-        <img src="foto_urbano1.jpg" onclick="abrirFoto(this.src)">
-        <img src="foto_urbano2.jpg" onclick="abrirFoto(this.src)">
+    <h2 class="titulo-categoria">Paisajes</h2>
+    <div class="contenedor-portadas">
+        <div class="card-modelo" onclick="abrirFoto('foto_paisaje1.jpg')">
+            <img src="foto_paisaje1.jpg" alt="Los Nevados">
+            <div class="overlay">
+                <h3>Los Nevados</h3>
+                <button class="btn-ver-mas">Explorar</button>
+            </div>
+        </div>
     </div>
 </section>
 
