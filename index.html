@@ -13,7 +13,7 @@
             --bg-color: #0d0d0d;
             --accent-color: #ffffff;
             --text-gray: #888;
-            --transition-speed: 2.5s; /* Transición más suave */
+            --transition-speed: 2.5s; 
         }
 
         body { 
@@ -43,16 +43,16 @@
         .revelar { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .revelar.activo { opacity: 1; transform: translateY(0); }
 
-        /* --- SLIDESHOW AJUSTADO --- */
+        /* --- SLIDESHOW PROFESIONAL --- */
         .presentacion-container {
-            max-width: 900px; /* Tamaño más contenido */
+            max-width: 1000px; 
             margin: 0 auto 100px auto;
             position: relative; 
             overflow: hidden; 
-            border-radius: 20px;
-            height: 60vh; /* Altura reducida para que no sea gigante */
+            border-radius: 24px;
+            height: 65vh; 
             background: #000;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
 
         .slide {
@@ -72,61 +72,62 @@
         .slide img { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* Foto completa sin recortes */
+            object-fit: contain; /* Asegura que la foto se vea COMPLETA */
             transform: scale(1);
-            transition: transform 8s linear; /* Efecto Ken Burns continuo */
+            transition: transform 10s linear; 
         }
 
-        .slide.active img { 
-            transform: scale(1.12); /* El zoom ocurre mientras la foto está activa */
-        }
+        /* Efecto de zoom suave cuando la foto está activa */
+        .slide.active img { transform: scale(1.1); }
         
         .slide-overlay {
-            position: absolute; bottom: 20px; width: 100%; text-align: center;
-            font-family: 'Syne'; font-size: 0.6rem; letter-spacing: 5px; 
-            color: rgba(255,255,255,0.5); z-index: 10;
+            position: absolute; bottom: 30px; width: 100%; text-align: center;
+            font-family: 'Syne'; font-size: 0.6rem; letter-spacing: 6px; 
+            color: rgba(255,255,255,0.4); z-index: 10;
             text-transform: uppercase; pointer-events: none;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* --- RESTO DE LA ESTRUCTURA --- */
+        /* --- BIOGRAFÍA --- */
         .bio-container { 
-            max-width: 900px; margin: 0 auto 100px auto; padding: 40px; 
+            max-width: 900px; margin: 0 auto 120px auto; padding: 50px; 
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 30px; backdrop-filter: blur(10px);
-            display: flex; gap: 40px; align-items: center;
+            border-radius: 40px; backdrop-filter: blur(15px);
+            display: flex; gap: 50px; align-items: center;
         }
 
-        .foto-perfil { flex: 0 0 250px; height: 350px; object-fit: cover; border-radius: 15px; filter: grayscale(1); }
+        .foto-perfil { flex: 0 0 280px; height: 380px; object-fit: cover; border-radius: 20px; filter: grayscale(1); }
 
-        .seccion { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-        .titulo-categoria { border-left: 3px solid #fff; padding-left: 15px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 4px; font-family: 'Syne'; font-size: 1.2rem;}
+        /* --- GALERÍA --- */
+        .seccion { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
+        .titulo-categoria { border-left: 4px solid #fff; padding-left: 20px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; font-family: 'Syne'; }
         
-        .contenedor-botones { display: flex; gap: 10px; margin-bottom: 25px; }
-        .btn-modelo { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 20px; cursor: pointer; border-radius: 20px; font-family: 'Syne'; font-size: 0.65rem; transition: 0.3s; }
-        .btn-modelo.activo-btn { background: white; color: black; border-color: white; }
+        .contenedor-botones { display: flex; gap: 15px; margin-bottom: 30px; }
+        .btn-modelo { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 25px; cursor: pointer; border-radius: 30px; font-family: 'Syne'; font-size: 0.7rem; transition: 0.3s; }
+        .btn-modelo.activo-btn { background: white; color: black; font-weight: 700; border-color: white; }
 
-        .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-        .galeria img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; cursor: pointer; transition: 0.5s ease; filter: grayscale(0.2); }
-        .galeria img:hover { transform: translateY(-5px); filter: grayscale(0); }
+        .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 60px; }
+        .galeria img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; cursor: pointer; transition: 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); filter: grayscale(0.3); }
+        .galeria img:hover { transform: scale(1.02); filter: grayscale(0); }
 
         #visor {
             display: none; position: fixed; z-index: 2000; top: 0; left: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
-            justify-content: center; align-items: center; backdrop-filter: blur(15px);
+            width: 100%; height: 100%; background: rgba(0,0,0,0.98);
+            justify-content: center; align-items: center; backdrop-filter: blur(25px);
         }
         #visor img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-        .wsp-flotante, .ig-flotante { position: fixed; right: 20px; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 100; transition: 0.3s; }
-        .wsp-flotante { bottom: 20px; background-color: #25d366; }
-        .ig-flotante { bottom: 80px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .wsp-flotante svg, .ig-flotante svg { width: 22px; fill: white; }
+        .wsp-flotante, .ig-flotante { position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 100; transition: 0.3s; }
+        .wsp-flotante { bottom: 30px; background-color: #25d366; }
+        .ig-flotante { bottom: 105px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .wsp-flotante svg, .ig-flotante svg { width: 28px; height: 28px; fill: white; }
 
-        footer { padding: 60px 20px; text-align: center; background: #050505; }
-        .redes a { color: #555; text-decoration: none; margin: 0 15px; font-size: 0.6rem; letter-spacing: 2px; }
+        footer { padding: 100px 20px; text-align: center; background: #050505; }
+        .redes a { color: #555; text-decoration: none; margin: 0 20px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 800px) { 
-            .bio-container { flex-direction: column; text-align: center; }
-            .presentacion-container { height: 45vh; width: 95%; }
+            .bio-container { flex-direction: column; padding: 40px 20px; }
+            .presentacion-container { height: 50vh; border-radius: 0; width: 100%; }
         }
     </style>
 </head>
@@ -139,24 +140,18 @@
 </header>
 
 <section class="bio-container revelar">
-    <img src="https://res.cloudinary.com/dzhzifsir/image/upload/v1/Larry_Arias/1.jpg" alt="Mateo Gallego" class="foto-perfil">
+    <img src="fotoperfil.jpg" alt="Mateo Gallego" class="foto-perfil">
     <div class="bio-info">
         <h2 class="titulo-categoria">Sobre Mí</h2>
         <p class="bio-texto">
-           Soy <strong>Mateo Gallego</strong> un fotógrafo colombiano con experiencia en fotografía editorial, de estudio y documental, enfocado en la creación de narrativas visuales que combinan estética, concepto y emoción.
-            Mi trabajo parte de la observación y el análisis de cada contexto, utilizando la luz y la composición como herramientas para comunicar ideas y sensaciones.
-            <br><br>
-            En la fotografía editorial desarrollo imágenes que dialogan con el contenido y el mensaje de cada proyecto, buscando síntesis visual y coherencia narrativa.
-            En el estudio, trabajo desde la planificación y el control del espacio para construir escenas que refuercen la identidad del sujeto o la idea a representar.
-             <br><br>
-            En el enfoque documental, registro realidades desde una mirada cercana y respetuosa, priorizando la autenticidad y la honestidad visual.
-            Cada proyecto representa para mí una oportunidad de contar historias con intención, generar conexión con el espectador y transformar momentos reales en imágenes significativas.
+           Soy <strong>Mateo Gallego</strong> un fotógrafo colombiano enfocado en la creación de narrativas visuales que combinan estética y emoción. 
+           Cada proyecto es una oportunidad de contar historias con intención y autenticidad.
         </p>
     </div>
 </section>
 
 <section class="presentacion-container revelar" id="slideshow">
-    <div class="slide-overlay">M.G. VISUALS — PORTFOLIO SHOWCASE</div>
+    <div class="slide-overlay">M.G. VISUALS — PRESENTACIÓN FILTRADA</div>
 </section>
 
 <section class="seccion revelar">
@@ -167,11 +162,20 @@
     </div>
     
     <div id="larry" class="modelo-content" style="display: block;">
-        <div class="galeria" id="galeria-larry"></div>
+        <div class="galeria">
+            <img src="retratosypersonas/foto1.jpg" onclick="abrirFoto(this)">
+            <img src="retratosypersonas/foto2.jpg" onclick="abrirFoto(this)">
+            <img src="retratosypersonas/foto3.jpg" onclick="abrirFoto(this)">
+            <img src="retratosypersonas/foto4.jpg" onclick="abrirFoto(this)">
+            <img src="retratosypersonas/foto5.jpg" onclick="abrirFoto(this)">
+        </div>
     </div>
 
     <div id="santiago" class="modelo-content" style="display: none;">
-        <div class="galeria" id="galeria-santiago"></div>
+        <div class="galeria">
+            <img src="retratosypersonas/santiago1.jpg" onclick="abrirFoto(this)">
+            <img src="retratosypersonas/santiago2.jpg" onclick="abrirFoto(this)">
+        </div>
     </div>
 </section>
 
@@ -185,63 +189,44 @@
 <footer>
     <div class="redes">
         <a href="https://instagram.com/_soy_mateo_" target="_blank">Instagram</a>
-        <a href="mailto:mateo@ejemplo.com">Contacto</a>
+        <a href="mailto:tuemail@ejemplo.com">Contacto</a>
     </div>
     <p style="font-size: 0.6rem; color: #333; margin-top: 20px;">© 2024 M.G. VISUALS — PROTEGIDO</p>
 </footer>
 
 <script>
-    const cloudName = "dzhzifsir";
-    const configModelos = [
-        { id: "larry", carpeta: "Larry_Arias", cantidad: 8 },
-        { id: "santiago", carpeta: "Santiago_Castro", cantidad: 2 }
-    ];
-
-    function inicializarFotos() {
-        configModelos.forEach(modelo => {
-            const contenedor = document.getElementById(`galeria-${modelo.id}`);
-            if (!contenedor) return;
-
-            for (let i = 1; i <= modelo.cantidad; i++) {
-                const img = document.createElement('img');
-                const urlBase = `https://res.cloudinary.com/${cloudName}/image/upload/v1/${modelo.carpeta}/${i}.jpg`;
-                img.src = urlBase;
-                img.onclick = function() { abrirFoto(this); };
-                contenedor.appendChild(img);
-            }
-        });
-        setTimeout(generarSlideshow, 1000);
-    }
-
-    function generarSlideshow() {
-        const slideshow = document.getElementById('slideshow');
+    function cargarPresentacion() {
+        const contenedorSlides = document.getElementById('slideshow');
+        // Seleccionamos fotos de las galerías existentes para alimentar el slideshow
         const todasLasFotos = Array.from(document.querySelectorAll('.galeria img'));
         
-        // Mezclar y tomar 8 fotos para el slideshow
+        // Mezclamos el orden para que sea dinámico
         todasLasFotos.sort(() => Math.random() - 0.5);
-        const seleccion = todasLasFotos.slice(0, 8);
-
-        seleccion.forEach((img, index) => {
+        
+        // Usamos las primeras 10 fotos mezcladas
+        todasLasFotos.slice(0, 10).forEach((img, index) => {
             const div = document.createElement('div');
             div.className = index === 0 ? 'slide active' : 'slide';
             div.innerHTML = `<img src="${img.src}">`;
-            slideshow.appendChild(div);
+            contenedorSlides.appendChild(div);
         });
 
-        iniciarCiclo();
+        iniciarAnimacionPresentacion();
     }
 
-    let currentSlide = 0;
-    function iniciarCiclo() {
+    let slideActual = 0;
+    function iniciarAnimacionPresentacion() {
         const slides = document.querySelectorAll('.slide');
         if (slides.length < 2) return;
-
+        
         setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 5000); // 5 segundos por foto
+           slides[slideActual].classList.remove('active');
+           slideActual = (slideActual + 1) % slides.length;
+           slides[slideActual].classList.add('active');
+        }, 5000); // Cambio cada 5 segundos
     }
+
+    window.onload = cargarPresentacion;
 
     function verModelo(id, btn) {
         document.querySelectorAll('.modelo-content').forEach(m => m.style.display = 'none');
@@ -250,17 +235,20 @@
         btn.classList.add('activo-btn');
     }
 
-    function abrirFoto(el) {
-        document.getElementById('fotoGrande').src = el.src;
+    function abrirFoto(elemento) {
+        document.getElementById('fotoGrande').src = elemento.src;
         document.getElementById('visor').style.display = 'flex';
     }
 
-    window.onload = inicializarFotos;
-
+    // Efecto de revelar al scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('activo'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.revelar').forEach(el => observer.observe(el));
+
+    // Bloqueo por enfoque
+    window.addEventListener('blur', () => document.body.classList.add('protegido'));
+    window.addEventListener('focus', () => document.body.classList.remove('protegido'));
 </script>
 
 </body>
