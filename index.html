@@ -29,7 +29,20 @@
         body.protegido { filter: blur(20px) grayscale(1); }
         img { -webkit-user-drag: none; user-drag: none; pointer-events: auto; }
 
-        /* NAVEGACIÓN - CORREGIDA */
+        /* FONDO REINSTALADO */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('fondo.png'); background-size: cover; background-position: center;
+            opacity: 0.15; z-index: -1; pointer-events: none;
+            animation: slowPan 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowPan { 
+            from { transform: scale(1); } 
+            to { transform: scale(1.1) translate(10px, 10px); } 
+        }
+
+        /* NAVEGACIÓN ALINEADA Y FUNCIONAL */
         nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 25px 0;
             display: flex; justify-content: center; align-items: center; gap: 40px;
@@ -49,20 +62,18 @@
 
         .nav-item { position: relative; display: flex; align-items: center; }
 
-        /* SUBMENÚ - OPTIMIZADO PARA CLICS */
         .dropdown-content {
             display: none; position: absolute; top: 100%; left: 50%;
             transform: translateX(-50%); background-color: #111;
             min-width: 220px; box-shadow: 0px 15px 40px rgba(0,0,0,0.9);
             z-index: 1100; border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 0; margin-top: 0; 
+            padding: 10px 0; margin-top: 0;
         }
 
-        /* Mantiene el menú abierto mientras el mouse se mueve hacia él */
         .nav-item:hover .dropdown-content { display: block; }
 
         .dropdown-content a {
-            color: white; padding: 10px 20px; text-decoration: none;
+            color: white; padding: 15px 20px; text-decoration: none;
             display: block; font-size: 0.65rem; letter-spacing: 2px;
             opacity: 0.7; transition: 0.2s; text-align: center;
             cursor: pointer; height: auto;
@@ -139,7 +150,7 @@
         #contacto { padding: 120px 20px; text-align: center; background: #050505; }
         .redes a { color: white; text-decoration: none; margin: 0 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.5; transition: 0.3s; }
 
-        /* FLOTANTES */
+        /* BOTONES FLOTANTES */
         .wsp-flotante, .ig-flotante { position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 100; transition: 0.3s; }
         .wsp-flotante { bottom: 30px; background-color: #25d366; }
         .ig-flotante { bottom: 105px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
@@ -274,14 +285,16 @@
             const id = valor === 'gal-street' ? 'seccion-street' : 'seccion-producto';
             document.getElementById(id).scrollIntoView();
         }
-        // Ocultar menú tras clic en móvil
-        document.querySelector('.dropdown-content').style.display = 'none';
-        setTimeout(() => document.querySelector('.dropdown-content').style.display = '', 500);
+        // Pequeño hack para forzar el cierre del menú en móviles tras clic
+        const drop = document.querySelector('.dropdown-content');
+        drop.style.display = 'none';
+        setTimeout(() => drop.style.display = '', 500);
     }
 
     function cargarPresentacion() {
         const contenedor = document.getElementById('slideshow');
         const imgs = Array.from(document.querySelectorAll('.galeria-grid img'));
+        if(!imgs.length) return;
         imgs.sort(() => Math.random() - 0.5);
         imgs.forEach((img, i) => {
             const div = document.createElement('div');
