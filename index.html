@@ -76,8 +76,20 @@
         /* SECCIONES COMUNES */
         .revelar { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .revelar.activo { opacity: 1; transform: translateY(0); }
-
         .separador { width: 50px; height: 1px; background: rgba(255,255,255,0.2); margin: 0 auto 80px auto; }
+
+        /* LISTA DESPLEGABLE */
+        .filtro-galeria {
+            text-align: center; margin-bottom: 50px;
+        }
+        .select-personalizado {
+            background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 25px; border-radius: 30px; font-family: 'Syne'; font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer; outline: none;
+            transition: 0.3s; width: 250px;
+        }
+        .select-personalizado:hover { border-color: white; background: rgba(255,255,255,0.1); }
+        .select-personalizado option { background: #111; color: white; }
 
         /* SECCIÓN: SOBRE MÍ */
         #sobre-mi { padding: var(--section-padding); }
@@ -105,7 +117,7 @@
         .slide.active { opacity: 1; transform: scale(1); }
         .slide img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-        .seccion-fotos { max-width: 1400px; margin: 0 auto 100px auto; }
+        .seccion-fotos { max-width: 1400px; margin: 0 auto 100px auto; scroll-margin-top: 100px; }
         .titulo-categoria { border-left: 4px solid #fff; padding-left: 20px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 5px; font-family: 'Syne'; }
         
         .contenedor-botones { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -173,12 +185,25 @@
 
 <section id="galeria">
     <div class="separador revelar"></div>
-    <h2 style="text-align: center; font-family: 'Syne'; letter-spacing: 10px; margin-bottom: 60px;" class="revelar">PORTAFOLIO</h2>
+    <h2 style="text-align: center; font-family: 'Syne'; letter-spacing: 10px; margin-bottom: 30px;" class="revelar">PORTAFOLIO</h2>
 
-    <div class="presentacion-container revelar" id="slideshow">
-        </div>
+    <div class="filtro-galeria revelar">
+        <select class="select-personalizado" onchange="navegarACategoria(this.value)">
+            <option value="" disabled selected>Explorar por...</option>
+            <optgroup label="Retratos">
+                <option value="larry">Retrato: Larry Arias</option>
+                <option value="santiago">Retrato: Santiago Castro</option>
+            </optgroup>
+            <optgroup label="Categorías">
+                <option value="cat-street">Street Photography</option>
+                <option value="cat-prod">Fotografía de Producto</option>
+            </optgroup>
+        </select>
+    </div>
 
-    <div class="seccion-fotos revelar">
+    <div class="presentacion-container revelar" id="slideshow"></div>
+
+    <div class="seccion-fotos revelar" id="cat-retratos">
         <h2 class="titulo-categoria">Retratos</h2>
         <div class="contenedor-botones">
             <button class="btn-modelo activo-btn" onclick="verModelo('larry', this)">Larry Arias</button>
@@ -203,7 +228,7 @@
         </div>
     </div>
 
-    <div class="seccion-fotos revelar">
+    <div class="seccion-fotos revelar" id="cat-street">
         <h2 class="titulo-categoria">Street Photography</h2>
         <div class="galeria-grid" id="gal-street">
             <img src="street/foto1.jpg" onclick="abrirVisor(this, 'gal-street')">
@@ -213,7 +238,7 @@
         </div>
     </div>
 
-    <div class="seccion-fotos revelar">
+    <div class="seccion-fotos revelar" id="cat-prod">
         <h2 class="titulo-categoria">Producto</h2>
         <div class="galeria-grid" id="gal-prod">
             <img src="producto/foto1.jpg" onclick="abrirVisor(this, 'gal-prod')">
@@ -253,6 +278,21 @@
     let autoSlideTimer;
     let touchStartX = 0;
     let touchEndX = 0;
+
+    // Función nueva para el menú desplegable
+    function navegarACategoria(valor) {
+        if (!valor) return;
+        
+        // Si es un modelo de Retratos
+        if (valor === 'larry' || valor === 'santiago') {
+            const btn = document.querySelector(`button[onclick*="${valor}"]`);
+            verModelo(valor, btn);
+            document.getElementById('cat-retratos').scrollIntoView();
+        } else {
+            // Si es una categoría general (Street o Producto)
+            document.getElementById(valor).scrollIntoView();
+        }
+    }
 
     function cargarPresentacion() {
         const contenedor = document.getElementById('slideshow');
@@ -326,7 +366,7 @@
         document.querySelectorAll('.modelo-content').forEach(m => m.style.display = 'none');
         document.querySelectorAll('.btn-modelo').forEach(b => b.classList.remove('activo-btn'));
         document.getElementById(id).style.display = 'block';
-        btn.classList.add('activo-btn');
+        if (btn) btn.classList.add('activo-btn');
     }
 
     window.onload = cargarPresentacion;
