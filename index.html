@@ -15,6 +15,8 @@
             --text-gray: #888;
         }
 
+        html { scroll-behavior: smooth; } /* Desplazamiento suave */
+
         body { 
             margin: 0; font-family: 'Inter', sans-serif;
             color: white; background-color: var(--bg-color); 
@@ -25,6 +27,22 @@
 
         body.protegido { filter: blur(20px) grayscale(1); }
         img { -webkit-user-drag: none; user-drag: none; pointer-events: auto; }
+
+        /* NAVEGACIÓN SUPERIOR */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 0;
+            display: flex; justify-content: center; gap: 40px;
+            background: linear-gradient(to bottom, rgba(13,13,13,0.8), transparent);
+            backdrop-filter: blur(10px); z-index: 1000;
+        }
+
+        nav a {
+            color: white; text-decoration: none; font-family: 'Syne'; font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 3px; transition: 0.3s;
+            opacity: 0.6;
+        }
+
+        nav a:hover { opacity: 1; letter-spacing: 5px; }
 
         /* FONDO ANIMADO */
         body::before {
@@ -39,7 +57,7 @@
             to { transform: scale(1.1) translate(10px, 10px); }
         }
 
-        header { padding: 120px 20px; text-align: center; }
+        header { padding: 160px 20px 100px 20px; text-align: center; }
         .banner-superior { max-width: 450px; width: 100%; height: auto; margin-bottom: 30px; animation: float 6s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
@@ -115,6 +133,8 @@
         .redes a { color: #555; text-decoration: none; margin: 0 20px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 800px) { 
+            nav { gap: 20px; padding: 15px 0; }
+            nav a { font-size: 0.6rem; letter-spacing: 1px; }
             .bio-container { flex-direction: column; padding: 40px 20px; }
             .presentacion-container { height: 60vh; }
         }
@@ -122,25 +142,24 @@
 </head>
 <body oncontextmenu="return false;"> 
 
+<nav>
+    <a href="#sobre-mi">Sobre Mí</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+</nav>
+
 <header>
     <img src="banner.png" alt="M.G. Visuals" class="banner-superior">
     <h1 class="revelar">MATEO GALLEGO</h1>
     <p class="revelar">Fotógrafo & Artista</p>
 </header>
 
-<section class="bio-container revelar">
+<section id="sobre-mi" class="bio-container revelar">
     <img src="fotoperfil.jpg" alt="Mateo Gallego" class="foto-perfil">
     <div class="bio-info">
         <h2 class="titulo-categoria">Sobre Mí</h2>
         <p class="bio-texto">
-           Soy <strong>Mateo Gallego</strong> un fotógrafo colombiano con experiencia en fotografía editorial, de estudio y documental, enfocado en la creación de narrativas visuales que combinan estética, concepto y emoción.
-            Mi trabajo parte de la observación y el análisis de cada contexto, utilizando la luz y la composición como herramientas para comunicar ideas y sensaciones.
-            <br><br>
-            En la fotografía editorial desarrollo imágenes que dialogan con el contenido y el mensaje de cada proyecto, buscando síntesis visual y coherencia narrativa.
-            En el estudio, trabajo desde la planificación y el control del espacio para construir escenas que refuercen la identidad del sujeto o la idea a representar.
-             <br><br>
-            En el enfoque documental, registro realidades desde una mirada cercana y respetuosa, priorizando la autenticidad y la honestidad visual.
-            Cada proyecto representa para mí una oportunidad de contar historias con intención, generar conexión con el espectador y transformar momentos reales en imágenes significativas.
+           Soy <strong>Mateo Gallego</strong> un fotógrafo colombiano enfocado en la creación de narrativas visuales que combinan estética y emoción.
         </p>
     </div>
 </section>
@@ -149,49 +168,51 @@
     <div class="slide-overlay">M.G. VISUALS — PRESENTACIÓN</div>
 </section>
 
-<section class="seccion revelar">
-    <h2 class="titulo-categoria">Retratos</h2>
-    <div class="contenedor-botones">
-        <button class="btn-modelo activo-btn" onclick="verModelo('larry', this)">Larry Arias</button>
-        <button class="btn-modelo" onclick="verModelo('santiago', this)">Santiago Castro</button>
-    </div>
-    
-    <div id="larry" class="modelo-content" style="display: block;">
-        <div class="galeria">
-            <img src="retratosypersonas/foto1.jpg" onclick="abrirVisor(this, 'larry')">
-            <img src="retratosypersonas/foto2.jpg" onclick="abrirVisor(this, 'larry')">
-            <img src="retratosypersonas/foto3.jpg" onclick="abrirVisor(this, 'larry')">
-            <img src="retratosypersonas/foto4.jpg" onclick="abrirVisor(this, 'larry')">
-            <img src="retratosypersonas/foto5.jpg" onclick="abrirVisor(this, 'larry')">
+<div id="galeria">
+    <section class="seccion revelar">
+        <h2 class="titulo-categoria">Retratos</h2>
+        <div class="contenedor-botones">
+            <button class="btn-modelo activo-btn" onclick="verModelo('larry', this)">Larry Arias</button>
+            <button class="btn-modelo" onclick="verModelo('santiago', this)">Santiago Castro</button>
         </div>
-    </div>
-
-    <div id="santiago" class="modelo-content" style="display: none;">
-        <div class="galeria">
-            <img src="retratosypersonas/santiago1.jpg" onclick="abrirVisor(this, 'santiago')">
-            <img src="retratosypersonas/santiago2.jpg" onclick="abrirVisor(this, 'santiago')">
+        
+        <div id="larry" class="modelo-content" style="display: block;">
+            <div class="galeria">
+                <img src="retratosypersonas/foto1.jpg" onclick="abrirVisor(this, 'larry')">
+                <img src="retratosypersonas/foto2.jpg" onclick="abrirVisor(this, 'larry')">
+                <img src="retratosypersonas/foto3.jpg" onclick="abrirVisor(this, 'larry')">
+                <img src="retratosypersonas/foto4.jpg" onclick="abrirVisor(this, 'larry')">
+                <img src="retratosypersonas/foto5.jpg" onclick="abrirVisor(this, 'larry')">
+            </div>
         </div>
-    </div>
-</section>
 
-<section class="seccion revelar">
-    <h2 class="titulo-categoria">Street Photography</h2>
-    <div class="galeria" id="gal-street">
-        <img src="street/foto1.jpg" onclick="abrirVisor(this, 'gal-street')">
-        <img src="street/foto2.jpg" onclick="abrirVisor(this, 'gal-street')">
-        <img src="street/foto3.jpg" onclick="abrirVisor(this, 'gal-street')">
-        <img src="street/foto4.jpg" onclick="abrirVisor(this, 'gal-street')">
-    </div>
-</section>
+        <div id="santiago" class="modelo-content" style="display: none;">
+            <div class="galeria">
+                <img src="retratosypersonas/santiago1.jpg" onclick="abrirVisor(this, 'santiago')">
+                <img src="retratosypersonas/santiago2.jpg" onclick="abrirVisor(this, 'santiago')">
+            </div>
+        </div>
+    </section>
 
-<section class="seccion revelar">
-    <h2 class="titulo-categoria">Producto</h2>
-    <div class="galeria" id="gal-prod">
-        <img src="producto/foto1.jpg" onclick="abrirVisor(this, 'gal-prod')">
-        <img src="producto/foto2.jpg" onclick="abrirVisor(this, 'gal-prod')">
-        <img src="producto/foto3.jpg" onclick="abrirVisor(this, 'gal-prod')">
-    </div>
-</section>
+    <section class="seccion revelar">
+        <h2 class="titulo-categoria">Street Photography</h2>
+        <div class="galeria" id="gal-street">
+            <img src="street/foto1.jpg" onclick="abrirVisor(this, 'gal-street')">
+            <img src="street/foto2.jpg" onclick="abrirVisor(this, 'gal-street')">
+            <img src="street/foto3.jpg" onclick="abrirVisor(this, 'gal-street')">
+            <img src="street/foto4.jpg" onclick="abrirVisor(this, 'gal-street')">
+        </div>
+    </section>
+
+    <section class="seccion revelar">
+        <h2 class="titulo-categoria">Producto</h2>
+        <div class="galeria" id="gal-prod">
+            <img src="producto/foto1.jpg" onclick="abrirVisor(this, 'gal-prod')">
+            <img src="producto/foto2.jpg" onclick="abrirVisor(this, 'gal-prod')">
+            <img src="producto/foto3.jpg" onclick="abrirVisor(this, 'gal-prod')">
+        </div>
+    </section>
+</div>
 
 <div id="visor" onclick="cerrarVisor()">
     <img id="fotoGrande" src="">
@@ -205,10 +226,10 @@
     <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.5 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
 </a>
 
-<footer>
+<footer id="contacto">
     <div class="redes">
         <a href="https://instagram.com/_soy_mateo_" target="_blank">Instagram</a>
-        <a href="mailto:mateogallego@ejemplo.com">Contacto</a>
+        <a href="mailto:mateogallego@ejemplo.com">Contacto Email</a>
     </div>
     <p style="font-size: 0.6rem; color: #333; margin-top: 20px;">© 2024 M.G. VISUALS — PROTEGIDO</p>
 </footer>
@@ -221,7 +242,6 @@
     let touchStartX = 0;
     let touchEndX = 0;
 
-    // --- CARGAR PRESENTACIÓN ---
     function cargarPresentacion() {
         const contenedor = document.getElementById('slideshow');
         const imgs = Array.from(document.querySelectorAll('.galeria img'));
@@ -250,7 +270,6 @@
     function iniciarAutoSlide() { autoSlideTimer = setInterval(() => cambiarSlide('sig'), 5000); }
     function reiniciarAutoSlide() { clearInterval(autoSlideTimer); iniciarAutoSlide(); }
 
-    // --- VISOR ---
     function abrirVisor(el, idGal) {
         const gal = document.getElementById(idGal);
         fotosActuales = Array.from(gal.querySelectorAll('img')).map(i => i.src);
@@ -272,7 +291,6 @@
 
     function cerrarVisor() { document.getElementById('visor').style.display = 'none'; }
 
-    // --- CONTROLES TECLADO ---
     document.addEventListener('keydown', (e) => {
         const visorAbierto = document.getElementById('visor').style.display === 'flex';
         if (e.key === "ArrowRight") visorAbierto ? navegarVisor('sig') : cambiarSlide('sig');
@@ -280,7 +298,6 @@
         if (e.key === "Escape") cerrarVisor();
     });
 
-    // --- CONTROLES TÁCTILES ---
     function configurarTactil(elemento, tipo) {
         elemento.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
         elemento.addEventListener('touchend', e => {
